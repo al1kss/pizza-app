@@ -1,0 +1,823 @@
+#:import dp kivy.metrics.dp
+#:import MDBoxLayout kivymd.uix.boxlayout.MDBoxLayout
+#:import MDIconButton kivymd.uix.button.MDIconButton
+#:import MDLabel kivymd.uix.label.MDLabel
+#:import MDScrollView kivymd.uix.scrollview.MDScrollView
+#:import MDCard kivymd.uix.card.MDCard
+#:import MDFloatLayout kivymd.uix.floatlayout.MDFloatLayout
+#:import MDTextField kivymd.uix.textfield.MDTextField
+#:import MDTextButton kivymd.uix.button.MDTextButton
+#:import MDSpinner kivymd.uix.spinner.MDSpinner
+#:import MDBoxLayout kivymd.uix.boxlayout.MDBoxLayout
+#:import MDDialog kivymd.uix.dialog.MDDialog
+#:import MDFlatButton kivymd.uix.button.MDFlatButton
+#:import MDSpinner kivymd.uix.spinner.MDSpinner
+
+#:import MDRectangleFlatIconButton kivymd.uix.button.MDRectangleFlatIconButton
+#:import MDRectangleFlatButton kivymd.uix.button.MDRectangleFlatButton
+#:import FitImage kivymd.uix.fitimage.FitImage
+
+ScreenManager:
+    LoginScreen:
+        name: "LoginScreen"
+    RegisterScreen:
+        name: "RegisterScreen"
+    LoginScreenReal:
+        name: "LoginScreenReal"
+    MainScreen:
+        name: "MainScreen"
+    CartScreen:
+        name: "CartScreen"
+    CheckoutCompleteScreen:
+        name: "CheckoutCompleteScreen"
+    AdminOrdersScreen:
+        name: "AdminOrdersScreen"
+
+<LoginScreen>:
+    name: "login"
+    MDFloatLayout:
+        md_bg_color: 0, 0, 0, 1
+
+        Image:
+            source: "assets/images/pizza_background.png"
+            size_hint: 1, 0.6
+            pos_hint: {"center_x": 0.5, "top": 1}
+
+        MDIconButton:
+            icon: "close"
+            pos_hint: {"left": 1, "top": 1}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            on_release: root.manager.current = "MainScreen"
+
+        MDLabel:
+            text: "Sign in to your profile"
+            font_style: "H5"
+            font_name: "Roboto-Bold"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.38}
+
+        MDLabel:
+            text: "To get the best pizza and get best offers"
+            font_style: "Body2"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 0.8, 0.8, 0.8, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.35}
+
+        MDRaisedButton:
+            text: "Log in with Email"
+            md_bg_color: 1, 0.4, 0, 1
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.25}
+            font_name: "Roboto-Medium"
+            height: dp(50)
+            rounded_button: True
+            on_release: root.manager.current = "LoginScreenReal"
+
+        MDTextButton:
+            text: "Sign in"
+            underline: True
+            font_style: "Caption"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 0.6, 0.6, 0.6, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.18}
+            on_release: root.manager.current = "RegisterScreen"
+
+        MDLabel:
+            text: "Version 11.3.0, build 322"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 0.6, 0.6, 0.6, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.15}
+
+<LoginScreenReal>:
+    name: "LoginScreenReal"
+    MDFloatLayout:
+        md_bg_color: 0, 0, 0, 1
+
+        Image:
+            source: "assets/images/logo.png"
+            size_hint: 1, 0.6
+            pos_hint: {"center_x": 0.5, "top": 1}
+
+        MDLabel:
+            text: "Login to your account"
+            font_style: "H5"
+            font_name: "Roboto-Bold"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDTextField:
+            id: uname
+            hint_text: "Username/Email"
+            mode: "rectangle"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.4}
+            line_color_normal: (1, 0.4, 0, 1)  # Orange line color when not focused
+            line_color_focus: (1, 0.2, 0, 1)   # Darker orange when focused
+            text_color_normal: (1, 1, 1, 1)  # White text
+            text_color_focus: (1, 1, 1, 1)   # White text when focused
+            hint_text_color: (1, 0.6, 0.3, 1)  # Lighter orange for the hint
+
+        MDTextField:
+            id: passwd
+            hint_text: "Password"
+            mode: "rectangle"
+            size_hint_x: 0.8
+            password: True
+            pos_hint: {"center_x": 0.5, "center_y": 0.3}
+            line_color_normal: (1, 0.4, 0, 1)
+            line_color_focus: (1, 0.2, 0, 1)
+            text_color_normal: (1, 1, 1, 1)
+            text_color_focus: (1, 1, 1, 1)
+            hint_text_color: (1, 0.6, 0.3, 1)
+
+        MDRaisedButton:
+            text: "Login"
+            md_bg_color: 1, 0.4, 0, 1
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.2}
+            height: dp(50)
+            rounded_button: True
+            on_release: root.try_login()
+
+        MDTextButton:
+            text: "Dont have an account? Register"
+            underline: True
+            font_style: "Caption"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 0.6, 0.6, 0.6, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.15}
+            on_release: root.manager.current = "RegisterScreen"
+
+<RegisterScreen>:
+    name: "RegisterScreen"
+    MDFloatLayout:
+        md_bg_color: 0.06, 0.06, 0.06, 1
+
+#        Image:
+#            source: "logo.png"
+#            allow_stretch: True
+#            keep_ratio: True
+#            pos_hint: {"center_x": 0.5, "top": 1}
+
+        MDLabel:
+            text: "Create an Account"
+            font_style: "H5"
+            font_name: "Roboto-Bold"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.55}
+
+        MDTextField:
+            id: username
+            hint_text: "Username"
+            mode: "rectangle"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            line_color_normal: (1, 0.4, 0, 1)
+            line_color_focus: (1, 0.2, 0, 1)
+            text_color_normal: (1, 1, 1, 1)
+            text_color_focus: (1, 1, 1, 1)
+            hint_text_color: (1, 0.6, 0.3, 1)
+
+        MDTextField:
+            id: email
+            hint_text: "Email"
+            mode: "rectangle"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.37}
+            line_color_normal: (1, 0.4, 0, 1)
+            line_color_focus: (1, 0.2, 0, 1)
+            text_color_normal: (1, 1, 1, 1)
+            text_color_focus: (1, 1, 1, 1)
+            hint_text_color: (1, 0.6, 0.3, 1)
+
+        MDTextField:
+            id: password
+            hint_text: "Password"
+            mode: "rectangle"
+            size_hint_x: 0.8
+            password: True
+            pos_hint: {"center_x": 0.5, "center_y": 0.29}
+            line_color_normal: (1, 0.4, 0, 1)
+            line_color_focus: (1, 0.2, 0, 1)
+            text_color_normal: (1, 1, 1, 1)
+            text_color_focus: (1, 1, 1, 1)
+            hint_text_color: (1, 0.6, 0.3, 1)
+
+        MDTextField:
+            id: confirm_password
+            hint_text: "Confirm Password"
+            mode: "rectangle"
+            size_hint_x: 0.8
+            password: True
+            pos_hint: {"center_x": 0.5, "center_y": 0.21}
+            line_color_normal: (1, 0.4, 0, 1)
+            line_color_focus: (1, 0.2, 0, 1)
+            text_color_normal: (1, 1, 1, 1)
+            text_color_focus: (1, 1, 1, 1)
+            hint_text_color: (1, 0.6, 0.3, 1)
+
+        MDRaisedButton:
+            text: "Register"
+            md_bg_color: 1, 0.4, 0, 1
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.12}
+            height: dp(50)
+            rounded_button: True
+            on_release: root.register()
+
+        MDTextButton:
+            text: "Back to Login"
+            underline: True
+            font_style: "Caption"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 0.6, 0.6, 0.6, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.07}
+            on_release: root.manager.current = "LoginScreen"
+
+<MainScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: 0.06, 0.06, 0.06, 1
+
+        # Top Bar
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(56)
+            padding: dp(8)
+            spacing: dp(8)
+
+            MDIconButton:
+                icon: "map-marker"
+                theme_text_color: "Custom"
+                text_color: 1, 0.6, 0, 1
+                on_release: app.open_location()
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(2)
+                MDLabel:
+                    text: "5-chōme Asakusabashi Taito City, Tokyo"
+                    font_style: "Subtitle1"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                MDLabel:
+                    text: "Free delivery, waiting time 10-20min"
+                    font_style: "Caption"
+                    theme_text_color: "Custom"
+                    text_color: 0, 1, 0, 1
+
+            # Button to open cart
+            MDIconButton:
+                icon: "account-circle"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.manager.current = "LoginScreen"
+
+        # Category scroll
+        ScrollView:
+            do_scroll_x: True
+            do_scroll_y: False
+            bar_width: 0
+            size_hint_y: None
+            height: dp(50)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_x: None
+                height: dp(50)
+                width: self.minimum_width
+                spacing: dp(8)
+                padding: dp(8)
+
+                HeritageCategoryCard:
+                    card_icon: "pizza"
+                    card_text: "All"
+                    on_release: app.select_category(self)
+                    on_release: root.manager.current = "CartScreen"
+
+                HeritageCategoryCard:
+                    card_icon: "moon-waning-crescent"
+                    card_text: "Ramadan"
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "egg-easter"
+                    card_text: "Breakfast"
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "human-child"
+                    card_text: "Kids' fave"
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "pizza"
+                    card_text: "Pizza"
+                    md_bg_color: 1, 0.4, 0, 1
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "sale"
+                    card_text: "Deals"
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "food-apple-outline"
+                    card_text: "Snacks"
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "cupcake"
+                    card_text: "Desserts"
+                    on_release: app.select_category(self)
+
+                HeritageCategoryCard:
+                    card_icon: "star"
+                    card_text: "Hits"
+                    on_release: app.select_category(self)
+
+        RelativeLayout:
+            # Pizza list
+            ScrollView:
+                do_scroll_y: True
+                bar_width: dp(3)
+                MDBoxLayout:
+                    id: menu_list
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(8)
+                    padding: dp(8)
+
+            MDRoundFlatIconButton:
+                icon: "cart"
+                id: total_price_btn
+                text: "0 JPY"
+                size_hint: None, None
+                padding: dp(10)
+                spacing: dp(10)
+                size: dp(100), dp(40)
+                pos_hint: {"right": 0.98, "bottom": 0.02}
+                md_bg_color: (1, 0.5, 0, 1)
+                text_color: (1, 1, 1, 1)
+                on_release: root.manager.current = "CartScreen"
+
+<CartScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: 0.06, 0.06, 0.06, 1
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(56)
+            padding: dp(8)
+            MDIconButton:
+                icon: "close"
+                pos_hint: {"left": 1, "top": 1}
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.manager.current = "MainScreen"
+
+            MDLabel:
+                text: "Cart"
+                font_style: "H6"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+
+        MDLabel:
+            id: cart_header
+            text: "0 items for 0 JPY"
+            font_style: "H5"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1,1,1,1
+            size_hint_y: None
+            height: dp(40)
+
+        ScrollView:
+            bar_width: dp(3)
+            MDBoxLayout:
+                id: cart_list
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
+                padding: dp(8)
+
+        MDLabel:
+            text: "Add to your order?"
+            font_style: "H6"
+            halign: "left"
+            theme_text_color: "Custom"
+            text_color: 1,1,1,1
+            size_hint_y: None
+            height: dp(40)
+            padding: dp(8)
+
+        ScrollView:
+            do_scroll_x: True
+            do_scroll_y: False
+            bar_width: 0
+            size_hint_y: None
+            height: dp(120)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_x: None
+                width: self.minimum_width
+                spacing: dp(8)
+                padding: dp(8)
+
+                # Example extra items
+                ExtraItemCard:
+                    item_name: "Coca-Cola"
+                    item_price: 159
+                    item_image: "assets/images/coke.png"
+                    on_release: root.add_extra_item(self.item_name, self.item_price)
+                ExtraItemCard:
+                    item_name: "Fries"
+                    item_price: 250
+                    item_image: "assets/images/fries.png"
+                    on_release: root.add_extra_item(self.item_name, self.item_price)
+                ExtraItemCard:
+                    item_name: "Coca-Cola"
+                    item_price: 159
+                    item_image: "assets/images/coke.png"
+                    on_release: root.add_extra_item(self.item_name, self.item_price)
+
+
+        # Checkout button
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(8)
+            spacing: dp(8)
+
+            MDRaisedButton:
+                id: checkout_btn
+                text: "Proceed to checkout for 0 сом"
+                md_bg_color: 1, 0.4, 0, 1
+                size_hint_x: 0.8
+                pos_hint: {"center_x": 0.5, "center_y": 0.25}
+                font_name: "Roboto-Medium"
+                height: dp(50)
+                rounded_button: True
+                on_release: root.proceed_to_checkout()
+
+# Single row for each cart item
+<CartItemRow@MDCard>:
+    size_hint_y: None
+    height: dp(80)
+    md_bg_color: 0.15, 0.15, 0.15, 1
+    radius: [15, 15, 15, 15]
+    orientation: "horizontal"
+    padding: dp(10)
+    spacing: dp(10)
+
+    # Image
+    Image:
+        id: pizza_img
+        source: "assets/images/pizza.png"
+        size_hint: None, None
+        size: dp(60), dp(60)
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(2)
+        MDLabel:
+            id: pizza_name
+            text: "Pizza Name"
+            font_style: "Subtitle1"
+            theme_text_color: "Custom"
+            text_color: 1,1,1,1
+        MDLabel:
+            id: pizza_desc
+            text: "Medium 30 cm"
+            font_style: "Caption"
+            theme_text_color: "Custom"
+            text_color: 0.8,0.8,0.8,1
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: dp(5)
+            MDLabel:
+                id: pizza_price
+                text: "525 JPY"
+                font_style: "Body1"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+            MDTextButton:
+                text: "Change"
+                theme_text_color: "Custom"
+                text_color: 1, 0.5, 0, 1
+                on_release: root.parent.parent.parent.update_cart_item(root, "change")
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(2)
+        size_hint_x: None
+        width: dp(70)
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: dp(5)
+            size_hint_y: None
+            height: dp(30)
+            MDIconButton:
+                icon: "minus"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                user_font_size: "8sp"
+                on_release: app.root.get_screen("CartScreen").update_cart_item(root, "minus")
+
+
+            MDLabel:
+                id: pizza_qty
+                text: "1"
+                halign: "center"
+                valign: "middle"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+
+            MDIconButton:
+                icon: "plus"
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                user_font_size: "8sp"
+                on_release: app.root.get_screen("CartScreen").update_cart_item(root, "plus")
+
+<ExtraItemCard@MDCard>:
+    size_hint: None, None
+    size: dp(120), dp(100)
+    md_bg_color: 0.15, 0.15, 0.15, 1
+    orientation: "vertical"
+    radius: [15, 15, 15, 15]
+    padding: dp(8)
+    spacing: dp(5)
+    on_release: app.cart.append({"name": root.item_name, "price": root.item_price, "quantity": 1, "image": root.item_image}); root.parent.refresh_cart()
+
+    Image:
+        source: root.item_image if hasattr(root, 'item_image') else "assets/images/pizza.png"
+        size_hint: None, None
+        size: dp(50), dp(50)
+        pos_hint: {"center_x": 0.5}
+
+    MDLabel:
+        text: root.item_name if hasattr(root, 'item_name') else "Extra pizza?"
+        font_style: "Caption"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 1,1,1,1
+
+    MDLabel:
+        text: f"{root.item_price}" if hasattr(root, 'item_price') else "450 JPY"
+        font_style: "Caption"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 1, 0.4, 0, 1
+
+<AdminOrdersScreen>:
+    name: "AdminOrdersScreen"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: 0.06, 0.06, 0.06, 1
+
+        # Top Bar
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(56)
+            padding: dp(8)
+            spacing: dp(8)
+            MDIconButton:
+                icon: "arrow-left"
+                on_release: root.manager.current = "MainScreen"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+            MDLabel:
+                text: "Orders"
+                font_style: "H6"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+
+        ScrollView:
+            MDBoxLayout:
+                id: orders_list
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
+                padding: dp(8)
+
+<OrderItemRow@MDCard>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(120)
+    md_bg_color: 1.0, 0.549, 0.0, 1
+    padding: dp(10)
+    spacing: dp(5)
+    # Display ticket and status on the top row
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: dp(10)
+        MDLabel:
+            text: "Ticket: " + str(root.order_data[5])
+            halign: "left"
+            size_hint_x: 0.5
+        # The dropdown item for status change:
+        MDDropDownItem:
+            id: status_dropdown
+            text: root.order_data[6]
+            on_release: root.open_status_menu()
+            size_hint_x: 0.5
+    MDLabel:
+        text: "User: " + (root.order_data[2] if len(root.order_data) > 2 else "N/A")
+        halign: "left"
+    MDLabel:
+        text: "Item: " + (root.order_data[3] if len(root.order_data) > 3 else "Unknown") +" (" + (str(root.order_data[4]) if len(root.order_data) > 4 else "0") + " JPY)"
+        halign: "left"
+
+
+
+<SizeQuantityContent>:
+    orientation: "vertical"
+    spacing: dp(20)
+    size_hint_y: None
+    height: dp(200)
+
+    MDLabel:
+        text: "Choose size:"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.8, 0.8, 0.8, 1
+
+    MDSpinner:
+        id: size_spinner
+        text: "Medium 30cm"
+        values: ["Small 25cm", "Medium 30cm", "Large 35cm"]
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5}
+        background_color: 1, 1, 1, 1
+
+    MDLabel:
+        text: "Quantity:"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.8, 0.8, 0.8, 1
+
+    MDSpinner:
+        id: qty_spinner
+        text: "1"
+        values: ["1","2","3","4","5","6","7","8","9","10"]
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5}
+        background_color: 1, 1, 1, 1
+
+# -----------------------------------------
+# Heritage Category Card
+# -----------------------------------------
+<HeritageCategoryCard@MDCard>:
+    size_hint: None, None
+    size: dp(110), dp(36)
+    md_bg_color: 0.15, 0.15, 0.15, 1
+    radius: [15, 15, 15, 15]
+    elevation: 3
+    orientation: "horizontal"
+    padding: dp(8)
+    spacing: dp(5)
+
+    MDIcon:
+        id: icon_item
+        icon: root.card_icon if hasattr(root, 'card_icon') else 'pizza'
+        size_hint: None, None
+        size: dp(20), dp(20)
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+
+    MDLabel:
+        id: label_item
+        text: root.card_text if hasattr(root, 'card_text') else 'Category'
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        font_style: "Body2"
+
+# -----------------------------------------
+# Heritage Food Card (for each pizza item)
+# -----------------------------------------
+<HeritageFoodCard@MDCard>:
+    size_hint_y: None
+    height: dp(120)
+    md_bg_color: 0.15, 0.15, 0.15, 1
+    radius: [15, 15, 15, 15]
+    elevation: 2
+    padding: dp(10)
+    spacing: dp(10)
+    orientation: "horizontal"
+
+    # Circular(ish) pizza image on the left
+    # Using FitImage so it resizes nicely.
+    FitImage:
+        id: pizza_image
+        size_hint: None, None
+        size: dp(100), dp(100)
+        radius: [40, 40, 40, 40]  # round corners to mimic a circle
+        keep_ratio: True
+        allow_stretch: True
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(2)
+
+        MDLabel:
+            id: pizza_name
+            text: "Pizza Name"
+            font_style: "Subtitle1"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+
+        MDLabel:
+            id: pizza_desc
+            text: "Description"
+            font_style: "Caption"
+            theme_text_color: "Custom"
+            text_color: 0.8, 0.8, 0.8, 1
+
+        MDLabel:
+            id: pizza_price
+            text: "from 295 сом"
+            font_style: "Body2"
+            theme_text_color: "Custom"
+            text_color: 1, 0.6, 0, 1
+
+<AddPizzaCard@MDCard>:
+    size_hint_y: None
+    height: dp(120)
+    md_bg_color: 0.2, 0.2, 0.2, 1
+    radius: [15, 15, 15, 15]
+    elevation: 2
+    padding: dp(10)
+    spacing: dp(10)
+    orientation: "vertical"
+    on_release: app.root.get_screen("MainScreen").show_add_pizza_dialog()
+
+    MDBoxLayout:
+        size_hint_y: None
+        height: dp(100)
+        spacing: dp(10)
+        MDIconButton:
+            icon: "plus"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            size_hint: None, None
+            size: dp(100), dp(100)
+
+<CheckoutCompleteScreen>:
+    name: "CheckoutCompleteScreen"
+    MDFloatLayout:
+        md_bg_color: 0, 0, 0, 1
+
+        MDLabel:
+            text: "Please pay by cash when your number is called on the screen."
+            font_style: "Body1"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1,1,1,1
+            pos_hint: {"center_x": 0.5, "center_y": 0.7}
+
+        MDLabel:
+            id: ticket_label
+            text: "#00"
+            font_style: "H2"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDRaisedButton:
+            text: "Return to Main Menu"
+            md_bg_color: 1, 0.4, 0, 1
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.3}
+            on_release:
+                root.manager.current = "MainScreen"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5, "center_y": 0.3}
+            on_release:
+                root.manager.current = "MainScreen"
