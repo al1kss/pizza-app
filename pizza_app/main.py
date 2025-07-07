@@ -19,8 +19,8 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.textfield import MDTextField
 
 # Database / password checks (stubbed or your existing logic)
-from secure_password import encrypt_password, check_password
-from my_lib import DatabaseManager
+from .my_lib import DatabaseManager
+from .secure_password import encrypt_password, check_password
 
 Window.size = (440, 800)
 
@@ -519,7 +519,23 @@ class MainApp(MDApp):
         );
         """, name="orders.sql")
 
-        return Builder.load_file("pizza.kv")
+        kv_path = self.get_kv_file_path()
+        return Builder.load_file(kv_path)
+
+    def get_kv_file_path(self):
+        """Get the path to the pizza.kv file"""
+        # First try current directory
+        if Path("pizza.kv").exists():
+            return "pizza.kv"
+
+        # Then try package directory
+        package_dir = Path(__file__).parent
+        kv_file = package_dir / "pizza.kv"
+        if kv_file.exists():
+            return str(kv_file)
+
+        # Fallback
+        return "pizza.kv"
 
     def create_database(self, query, name):
         db = DatabaseManager(name=name)

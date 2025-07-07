@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pizza-ordering-app"
+version = "1.0.5"
+description = "A beautiful pizza ordering application built with KivyMD"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "Alikhan Abdykaimov", email = "2026.alikhan.abdykaimov@uwcisak.jp"},
+]
+keywords = ["kivymd", "pizza", "ordering", "app", "restaurant", "gui", "mobile"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: Games/Entertainment",
+]
+dependencies = [
+    "kivymd>=1.2.0",
+    "kivy>=2.2.0",
+    "passlib>=1.7.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/al1kss/pizza-app"
+"Bug Reports" = "https://github.com/al1kss/pizza-app/issues"
+"Source" = "https://github.com/al1kss/pizza-app/"
+
+[project.scripts]
+pizza-app = "pizza_app.cli:main"
+pizza-ordering-app = "pizza_app.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pizza_app*"]
+
+[tool.setuptools.package-data]
+pizza_app = ["*.kv", "assets/images/*", "assets/databases/*"]
