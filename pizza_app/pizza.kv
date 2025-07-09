@@ -104,6 +104,13 @@ ScreenManager:
             size_hint: 1, 0.6
             pos_hint: {"center_x": 0.5, "top": 1}
 
+        MDIconButton:
+            icon: "close"
+            pos_hint: {"left": 1, "top": 1}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            on_release: root.manager.current = "MainScreen"
+
         MDLabel:
             text: "Login to your account"
             font_style: "H5"
@@ -306,7 +313,6 @@ ScreenManager:
                     card_icon: "pizza"
                     card_text: "All"
                     on_release: app.select_category(self)
-                    on_release: root.manager.current = "CartScreen"
 
                 HeritageCategoryCard:
                     card_icon: "moon-waning-crescent"

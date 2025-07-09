@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="pizza-ordering-app",
-    version="1.0.5",
+    version="1.0.6",
     author="Alikhan Abdykaimov",
     author_email="2026.alikhan.abdykaimov@uwcisak.jp",
     description="A beautiful pizza ordering application built with KivyMD",
