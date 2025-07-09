@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pizza-ordering-app"
-version = "1.0.5"
+version = "1.0.6"
 description = "A beautiful pizza ordering application built with KivyMD"
 readme = "README.md"
 requires-python = ">=3.7"
