@@ -177,4 +177,4 @@ If you encounter any issues or have questions:
 
 ---
 
-Made with ❤️ and 🍕 by Alikhan Abdykaimov application built with KivyMD. This app features a modern interface for browsing pizza menus, managing orders, and handling user authentication.
+Made with ❤️ and 🍕 by Alikhan Abdykaimov application built with KivyMD. This app features a modern interface for browsing pizza menus, managing orders, and handling user authentication. Readme Generated with the help of AI. Thank you!
