@@ -1,6 +1,6 @@
 # 🍕 Pizza Ordering App
 
-A beautiful and intuitive pizza ordering application built with KivyMD. This app features a modern interface for browsing pizza menus, managing orders, and handling user authentication with admin capabilities.
+A beautiful and intuitive pizza ordering application built with KivyMD. This app features a modern interface for browsing pizza menus, managing orders, and handling user authentication with admin capabilities. (maybe I will pitch this to one pizza place, thank you SHIPWRECKEDD!!)
 
 ![Python](https://img.shields.io/badge/python-v3.7+-blue.svg)
 ![KivyMD](https://img.shields.io/badge/kivymd-v1.2.0+-orange.svg)
